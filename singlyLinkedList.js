@@ -28,6 +28,11 @@
          this.length=0;
 
      }
+     /**
+      * 
+      * @param {*} val 
+      * this method will a node at the end of linked list with time complexity O(1)
+      */
      push(val){
         var newNode = new Node(val);
         /**
@@ -51,7 +56,9 @@
         
      }
 /**
- * this is for deleting the tail element i.e. deletion of last node but one edge case is not covered of there is only on head
+ * this is for deleting the tail element or last element in linked list i.e. deletion of last node 
+ * but one edge case is not covered if  there is only head
+ * with time complexity O(1)
  */
      pop(){
         if(!this.head) return undefined;
@@ -67,7 +74,8 @@
         return current;
  }
  /**
-  * Shift will delete the head node
+  * Shift will delete the head node i.e. first element of the linked list
+  * with time complexity O(1)
   */
  shift(){
     if (!this.head) return undefined;
@@ -78,7 +86,8 @@
     
  }
  /**
-  * Unshift will add the one new element to the begining
+  * Unshift will add the one new element to the begining of the existing or new linked list with null or empty
+  * with time complexity O(1)
   */
  unshift(val){
      var newNode = new Node(val)
@@ -94,6 +103,33 @@
      return this;
 
  }
+ /**
+  * traverse through list to seach one particular value and it will have time complexity O(n)
+  */
+ get(index){
+    var current =  this.head;
+     if(index <0 || index>=this.length) return null;
+     for(let i=0; i<this.length-1;i++){
+         
+         if(i !== index){
+            current = current.next;
+         } 
+         else{
+         return current;
+         }
+     }
+    /**
+     * Below is alternate solution using WHILE loop with time complexity O(n)
+     */
+    // if(index <0 || index>=this.length) return null;
+    // var counter = 0;
+    // var current = this.head;
+    // while(counter!==index){
+    //     current =  current.next;
+    //     counter++
+    // }
+    // return current;
+ }
 }
 var list = new SinglyLinkedList();
 list.push("firstData");
@@ -106,3 +142,4 @@ list.shift();
 console.log("after shift : " + JSON.stringify(list));
 list.unshift("newData");
 console.log("after unshift : "+ JSON.stringify(list));
+console.log("after get : "+ JSON.stringify(list.get(1)));
