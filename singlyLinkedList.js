@@ -63,16 +63,46 @@
         }
         this.tail = newTail;
         this.tail.next = null;
-        console.log(current.val);
-        console.log(newTail.val);
         this.length--
         return current;
  }
+ /**
+  * Shift will delete the head node
+  */
+ shift(){
+    if (!this.head) return undefined;
+    // var currentHead = this.head;
+    this.head= this.head.next
+    this.length--
+    return this
+    
  }
+ /**
+  * Unshift will add the one new element to the begining
+  */
+ unshift(val){
+     var newNode = new Node(val)
+     if(!this.head){
+         this.head = newNode;
+         this.tail = newNode;
+     } 
+     else{
+     newNode.next = this.head;
+     this.head = newNode;
+     }
+     this.length++
+     return this;
+
+ }
+}
 var list = new SinglyLinkedList();
 list.push("firstData");
 list.push("secondData");
 list.push("thirdData");
 console.log("before deletion, element count is : " + list.length)
 list.pop();
-console.log(list);
+console.log("after pop : " + JSON.stringify(list));
+list.shift();
+console.log("after shift : " + JSON.stringify(list));
+list.unshift("newData");
+console.log("after unshift : "+ JSON.stringify(list));
