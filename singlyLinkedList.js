@@ -31,7 +31,7 @@
      push(val){
         var newNode = new Node(val);
         /**
-         * If condition is bascially handling the edge case i.e. if linked list is empty
+         * If condition is bascially handling the edge case i.e. if linked list is empty and inserting element at the last
          */
         if(!this.head){
             this.head = newNode;
@@ -50,11 +50,29 @@
         return this;
         
      }
-    
-    
+/**
+ * this is for deleting the tail element i.e. deletion of last node but one edge case is not covered of there is only on head
+ */
+     pop(){
+        if(!this.head) return undefined;
+        var current = this.head;
+        var newTail =  current;
+        while(current.next){
+            newTail = current
+            current = current.next
+        }
+        this.tail = newTail;
+        this.tail.next = null;
+        console.log(current.val);
+        console.log(newTail.val);
+        this.length--
+        return current;
  }
- var list = new SinglyLinkedList();
+ }
+var list = new SinglyLinkedList();
 list.push("firstData");
 list.push("secondData");
 list.push("thirdData");
+console.log("before deletion, element count is : " + list.length)
+list.pop();
 console.log(list);
