@@ -109,15 +109,12 @@
  get(index){
     var current =  this.head;
      if(index <0 || index>=this.length) return null;
-     for(let i=0; i<this.length-1;i++){
-         
+     for(let i=0; i<this.length-1;i++){  
          if(i !== index){
             current = current.next;
          } 
-         else{
-         return current;
-         }
-     }
+        } 
+     return current;
     /**
      * Below is alternate solution using WHILE loop with time complexity O(n)
      */
@@ -130,11 +127,85 @@
     // }
     // return current;
  }
+ /**
+  * Set method will update te value in a node for specified index
+  */
+ set(index, value){
+    var node = this.get(index);
+    console.log(JSON.stringify(node));
+    if(node){
+        node.val = value;
+        return this;
+    }
+        return "No index available to update";
+ }
+/**
+ * Insert method will add new node at some index
+ */
+ insert(index,val){
+ var newNode = new Node(val);
+ if(index<0 || index > this.length) return false;
+ if(index === 0) return this.unshift(val);
+ if(index === this.length) return this.push(val);
+ var previousNode = this.get(index-1);
+ var temp =  previousNode.next;
+ previousNode.next = newNode;
+ newNode.next = temp;
+ this.length++
+ return this;
+
+ }
+ /**
+  * Remove method will remove a node from index
+  */
+ remove(index){
+ if(index<0 || index > this.length) return false;
+ if(index === 0) return this.shift()
+ if(index === this.length-1) return this.pop();
+ var previousNode = this.get(index-1)
+ var removed = previousNode.next;
+ previousNode.next = removed.next
+ this.length--
+ return removed;
+ }
+/**
+ * Reverse method will be reversing the while linked list i.e. from tail ---> head
+ */
+
+ reverse() {
+     var first  = this.head;
+     this.tail = this.head;
+     var second = first.next;
+     while(second) {
+         let temp = second.next;
+         second.next = first;
+         first = second;
+         second = temp;
+
+     }
+     this.head.next = null;
+     this.head = first;
+     return this;
+ }
+/**
+ * This method is just to understand the reverse of linked list to visualize the  data, not to use in the implementations.
+ */
+ print() {
+    var arr = []
+    var current_node = this.head;
+    while(current_node){
+         arr.push(current_node.val);
+         current_node = current_node.next;
+    }
+    return arr;
+ }
 }
 var list = new SinglyLinkedList();
-list.push("firstData");
-list.push("secondData");
-list.push("thirdData");
+list.push("1");
+list.push("2");
+list.push("3");
+list.push("4");
+list.push("5");
 console.log("before deletion, element count is : " + list.length)
 list.pop();
 console.log("after pop : " + JSON.stringify(list));
@@ -142,4 +213,10 @@ list.shift();
 console.log("after shift : " + JSON.stringify(list));
 list.unshift("newData");
 console.log("after unshift : "+ JSON.stringify(list));
-console.log("after get : "+ JSON.stringify(list.get(1)));
+console.log("after get : "+ JSON.stringify(list.get(2)));
+console.log("after set : "+ JSON.stringify(list.set(2, 'updatedDate')));
+console.log("after insert : "+ JSON.stringify(list.insert(2, 'insertedData')));
+console.log("after remove : "+ JSON.stringify(list.remove(1)));
+console.log("before reverse : " + JSON.stringify(list.print()));
+list.reverse();
+console.log("after reverse : " + JSON.stringify(list.print()));
