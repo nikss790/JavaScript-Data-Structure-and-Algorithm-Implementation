@@ -31,7 +31,7 @@
      /**
       * 
       * @param {*} val 
-      * this method will a node at the end of linked list with time complexity O(1)
+      * this method will add a node at the end of linked list with time complexity O(1)
       */
      push(val){
         var newNode = new Node(val);
